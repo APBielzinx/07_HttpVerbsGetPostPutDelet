@@ -1,36 +1,33 @@
 package br.com.erudio;
 
 import br.com.erudio.exceptions.UnsuportedMathOperationException;
-import br.com.erudio.functions.Calcs;
-import br.com.erudio.functions.IsNumeric;
+
+import br.com.erudio.model.Person;
+import br.com.erudio.services.PersonServices;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
+@RequestMapping("/person")
 public class PersonController {
 
-    private static final String template = "Hellow, %s!";
-    private static final AtomicLong counter = new AtomicLong();
+    @Autowired
+    private PersonServices services;
 
-
-    @RequestMapping(value = "/sum/{numberOne}/{numberTwo}",
-            method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}",
+            method = RequestMethod.GET,
+    produces = MediaType.APPLICATION_JSON_VALUE)
 
     //soma
-    public Double sum(
-            @PathVariable(value = "numberOne") String numberOne,
-            @PathVariable(value = "numberTwo") String numberTwo
-            ) throws Exception{
-
-            if (!isNumeric.isNumeric(numberOne) || !isNumeric.isNumeric(numberTwo)){
-                throw new UnsuportedMathOperationException("Please set a numeric value");
-            }
+    public Person findById(@PathVariable(value = "id") String id) throws Exception{
 
 
 
+        return services.findById(id);
 
-
-
-
+    }
 }
