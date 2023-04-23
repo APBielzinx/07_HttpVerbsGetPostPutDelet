@@ -20,6 +20,7 @@ public class PersonController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Person> findAll() {
 
+        System.out.println(services.findAll());
 
         return services.findAll();
     }
